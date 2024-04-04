@@ -33,7 +33,7 @@ public class BehemothAI : EnemyAI
         if (health <= 0)
         {
             anim.SetTrigger("isDead");
-            Invoke("DesTroys", 1f);
+            Invoke("DesTroys", 1);
         }
     }
     void DesTroys()
@@ -67,7 +67,7 @@ public class BehemothAI : EnemyAI
                    }
                 
 
-                if (Vector2.Distance(transform.position, target.position) < attackDistance)
+                if (Vector2.Distance(transform.position, target.position) < attackDistance && health>0)
                 {
                     anim.SetBool("isAttack", true);
                 }
