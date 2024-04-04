@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         idAttack = Animator.StringToHash("isAttack");
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -28,13 +28,17 @@ public class PlayerAttack : MonoBehaviour
     {
         anim.SetTrigger(idAttack);
         Collider2D[] hitEnemys = Physics2D.OverlapCircleAll (transform.position, radiusAttack,enemyLayer);
+        foreach (var enemy in hitEnemys) 
+        {
+            enemy.GetComponent<BehemothAI>().TakeDamage();
+        }
     }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         if (pointAttack != null)
         { 
-        Gizmos.DrawWireSphere(pointAttack.position, radiusAttack);
+            Gizmos.DrawWireSphere(pointAttack.position, radiusAttack);
         }
     }
 }

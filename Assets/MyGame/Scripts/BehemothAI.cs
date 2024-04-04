@@ -21,16 +21,29 @@ public class BehemothAI : EnemyAI
     [SerializeField] private float attackDistance;
     void Start()
     {
-
+        health = maxHealth;
         pointC = pointA.position;
         isIdle = Animator.StringToHash("isIdle");
         target=GameObject.FindGameObjectWithTag("Player").transform;
        
     }
-
+    public void TakeDamage()
+    {
+        health -= attack;
+        if (health <= 0)
+        {
+            anim.SetTrigger("isDead");
+            Invoke("DesTroys", 1f);
+        }
+    }
+    void DesTroys()
+    {
+        Destroy(gameObject);
+    }
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(health);
         if (target != null)
         {
            
@@ -96,5 +109,6 @@ public class BehemothAI : EnemyAI
             }
         }        
     }
+   
 
 }
