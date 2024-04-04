@@ -37,7 +37,22 @@ public class BehemothAI : EnemyAI
             Vector2 dir = (target.position - transform.position).normalized;
             if (Vector2.Distance(transform.position,target.position) < stopDistance)
             {
-                rb.velocity = dir* speedMove;
+                
+                if(target.position.x - transform.position.x < 0)
+                   {
+                      // sp.flipX = true; // flipx
+                       Vector2 scale = transform.localScale; //flipx
+                       scale.x = 1;//flipx
+                       transform.localScale = scale;//flipx
+                   }
+                else if(target.position.x - transform.position.x > 0)
+                   {
+                    // sp.flipX = false; //flip x
+                        Vector2 scale = transform.localScale; //flipx
+                        scale.x = -1;//flipx
+                        transform.localScale = scale;//flipx
+                   }
+                
 
                 if (Vector2.Distance(transform.position, target.position) < attackDistance)
                 {
@@ -45,8 +60,10 @@ public class BehemothAI : EnemyAI
                 }
                 else
                 {
+                    rb.velocity = dir* speedMove; //di chuyen
                     anim.SetBool("isAttack", false);
                 }
+
             }
             else if(Vector2.Distance(transform.position, target.position) > stopDistance) 
             {
@@ -55,14 +72,20 @@ public class BehemothAI : EnemyAI
                 if (pointC == pointA.position)
                 {
                     targetPos = pointB.position;
-                    sp.flipX = false;
+                   // sp.flipX = false;
+                    Vector2 scale = transform.localScale; //flipx
+                    scale.x = -1;//flipx
+                    transform.localScale = scale;//flipx*/                
                     anim.SetTrigger(isIdle);
                     pointC = pointB.position;
                 }
                 if (transform.position==pointB.position)
                 {
                     targetPos = pointA.position;
-                    sp.flipX = true;
+                    //sp.flipX = true;
+                    Vector2 scale = transform.localScale; //flipx
+                    scale.x = 1;//flipx
+                    transform.localScale = scale;//flipx*/
                     anim.SetTrigger(isIdle);
                 }
                 if (transform.position == pointA.position)

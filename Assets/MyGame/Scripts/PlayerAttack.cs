@@ -6,6 +6,9 @@ public class PlayerAttack : MonoBehaviour
 {
     private Animator anim;
     private int idAttack;
+    [SerializeField] Transform pointAttack;
+    [SerializeField] float radiusAttack;
+    [SerializeField] LayerMask enemyLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +27,14 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
         anim.SetTrigger(idAttack);
+        Collider2D[] hitEnemys = Physics2D.OverlapCircleAll (transform.position, radiusAttack,enemyLayer);
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        if (pointAttack != null)
+        { 
+        Gizmos.DrawWireSphere(pointAttack.position, radiusAttack);
+        }
     }
 }

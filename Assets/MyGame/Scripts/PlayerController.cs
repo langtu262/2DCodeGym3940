@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool(idJump, false);
         }
-
     }
 
     private void Move(float dir)
